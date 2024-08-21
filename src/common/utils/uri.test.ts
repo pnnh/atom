@@ -1,4 +1,4 @@
-import {stringToUri} from "@/utils/uri";
+import {stringToUri} from "./uri";
 
 describe('stringToUri', () => {
     it('renders a heading', () => {
