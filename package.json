@@ -1,12 +1,16 @@
 {
   "name": "@pnnh/atom",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "个人项目公共组件",
   "license": "AGPL-3.0",
   "scripts": {
     "build": "rollup --config rollup.config.mjs",
     "publish": "npm run build && npm publish",
     "test": "jest --config=jest.server.mjs && jest --config=jest.client.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pnnh/atom.git"
   },
   "exports": {
     ".": {

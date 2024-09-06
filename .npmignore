@@ -6,3 +6,4 @@ src/
 lib/status.html
 lib/dts/
 example/
+build/
