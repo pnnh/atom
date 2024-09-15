@@ -7,6 +7,7 @@ export * from './common/utils/query'
 export * from './common/utils/rand'
 export * from './common/utils/string'
 export * from './common/utils/uri'
+export * from './common/utils/html'
 
 export function sayHelloCommon(word: string) {
     return "Hello from Common!" + word
