@@ -8,6 +8,8 @@ export * from './common/utils/rand'
 export * from './common/utils/string'
 export * from './common/utils/uri'
 export * from './common/utils/html'
+export * from './common/utils/email'
+export * from './common/utils/uuid'
 
 export function sayHelloCommon(word: string) {
     return "Hello from Common!" + word
