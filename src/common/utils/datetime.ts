@@ -7,3 +7,9 @@ export function formatRfc3339 (date: string | Date): string {
   }
   return ''
 }
+
+// 通过纯JS获取当前时间戳
+export function getTimestamp() {
+  const timestamp = new Date().getTime();
+  return Math.floor(timestamp / 1000)
+}
