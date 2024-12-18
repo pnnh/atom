@@ -1,22 +1,18 @@
-import { Mime } from 'mime'
 
-import standardTypes from 'mime/types/standard.js';
-import otherTypes from 'mime/types/other.js';
+export function getMimeType(path: string): string {
+    const mimeMap: Map<string, string> = new Map<string, string>()
+    mimeMap.set('txt', 'text/plain')
+    mimeMap.set('html', 'text/html')
+    mimeMap.set('css', 'text/css')
+    mimeMap.set('js', 'text/javascript')
+    mimeMap.set('json', 'application/json')
+    mimeMap.set('xml', 'application/xml')
 
-const mime = new Mime(standardTypes, otherTypes);
-
-const textFileList = [];
-
-// xcode 项目文件
-textFileList.push('swift', 'xcconfig', 'modulemap', 'pch', 'plist', 'pbxproj', 'xcworkspace', 'entitlements');
-
-// nodejs 项目文件
-textFileList.push('lock');
-
-mime.define({ 'text/plain': textFileList });
-
-export function getType(path: string) {
-    return mime.getType(path) || 'application/octet-stream'
+    const ext = path.split('.').pop()
+    if (!ext) {
+        return 'text/plain'
+    }
+    return mimeMap.get(ext) || 'text/plain'
 }
 
-export type getMimeType = typeof getType
+export type getType = typeof getMimeType
