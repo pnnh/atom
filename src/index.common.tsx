@@ -1,4 +1,5 @@
 import './index.scss'
+
 export * from './common/utils/basex'
 export * from './common/utils/datetime'
 export * from './common/utils/media'
@@ -11,6 +12,7 @@ export * from './common/utils/html'
 export * from './common/utils/email'
 export * from './common/utils/uuid'
 export * from './index.common'
+export * from './client/postoffice/mailbox'
 export * from './client/clipboard'
 export * from './common/models/toc'
 export * from './common/models/stele'
