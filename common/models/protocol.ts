@@ -36,6 +36,8 @@ export type PLInsertResult<T> = CommonResult<PLInsertData<T>>
 
 export type PLSelectResult<T> = CommonResult<PLSelectData<T>>
 
+export type PLGetResult<T> = CommonResult<T>
+
 export function emptySelectResult() {
     return {
         code: CodeOk,

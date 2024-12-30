@@ -7,6 +7,10 @@ export function uuidV1() {
     return uuidv1()
 }
 
+export function isValidUUID(uuid: string) {
+    return validate(uuid)
+}
+
 export function uuidV4() {
     return uuidv4()
 }

@@ -1,4 +1,5 @@
-import {PSChannelModel} from "@/models/common/channel";
+import {PSChannelModel} from "@/atom/common/models/channel";
+
 
 export interface PSArticleModel {
     urn: string
@@ -16,6 +17,14 @@ export interface PSArticleModel {
     channel: string
     partition: string
     path: string
+}
+
+export interface PSArticleMetadataModel {
+    urn: string
+    image: string
+    description: string
+    title: string
+    tags: string
 }
 
 export interface PSArticleFileModel {

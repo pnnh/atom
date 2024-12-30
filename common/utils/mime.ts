@@ -16,3 +16,11 @@ export function getMimeType(path: string): string {
 }
 
 export type getType = typeof getMimeType
+
+export function isImageType(type: string): boolean {
+    const lowerType = type.toLowerCase().trim()
+    return lowerType.startsWith('image/') ||
+        lowerType.endsWith(".jpg") ||
+        lowerType.endsWith(".jpeg") ||
+        lowerType.endsWith(".png") || lowerType.endsWith(".gif")
+}
