@@ -42,6 +42,11 @@ export function uuidToBase58(uuidString: string) {
     return base58xrp.encode(data);
 }
 
+export function base58ToUuid(base58String: string) {
+    const data = base58xrp.decode(base58String);
+    return uuidv4({random: data});
+}
+
 /**
  * 将字符串转换为base58编码的字符串
  * @param data - 待编码的字符串

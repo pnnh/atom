@@ -1,6 +1,6 @@
 import {marked, Token} from 'marked'
-import {generatorRandomString} from "@/utils/string";
-import {CodeBlockNode, HeadingNode, ImageNode, LinkNode, ListNode, SteleBody, SteleNode} from "@/models/common/stele";
+import {generatorRandomString} from "@/atom/common/utils/string";
+import {CodeBlockNode, HeadingNode, ImageNode, LinkNode, ListNode, SteleBody, SteleNode} from "@/atom/common/models/stele";
 
 export function tokenToNode(token: Token): SteleNode {
     let children: SteleNode[] | undefined
