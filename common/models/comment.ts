@@ -9,6 +9,7 @@ export interface PSCommentModel {
     referer?: string;
     domain: string;
     directory: string;
+    nickname: string;
     resource: string;
     ipaddress: string;
     status: number;
