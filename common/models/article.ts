@@ -19,6 +19,10 @@ export interface PSArticleModel {
     path: string
 }
 
+export interface MTNoteModel extends PSArticleModel {
+    uid: string
+}
+
 export interface PSArticleMetadataModel {
     urn: string
     image: string

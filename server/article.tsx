@@ -19,7 +19,7 @@ export function BuildBodyHtml(props: {
         bodyObject = JSON.parse(props.body)
         if (!bodyObject) return <>无效文档格式</>
         if (!bodyObject.name) bodyObject.name = 'body'
-    } else if (props.header === 'markdown' && typeof props.body === 'string') {
+    } else if ((props.header === 'markdown' || props.header === 'MTNote') && typeof props.body === 'string') {
         bodyObject = markdownToStele(props.body)
     }
     if (!bodyObject) return <>无效文档格式</>
