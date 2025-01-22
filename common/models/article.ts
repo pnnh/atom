@@ -2,7 +2,6 @@ import {PSChannelModel} from "@/atom/common/models/channel";
 
 
 export interface PSArticleModel {
-    urn: string
     title: string
     header: string
     body: string
@@ -24,6 +23,7 @@ export interface MTNoteModel extends PSArticleModel {
 }
 
 export interface PSArticleMetadataModel {
+    uid: string
     urn: string
     image: string
     description: string
