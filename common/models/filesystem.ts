@@ -1,5 +1,6 @@
 export interface PSFileModel {
     URN: string;
+    Uid: string;
     Title: string
     Name: string
     Keywords: string
