@@ -30,6 +30,7 @@ export interface PLSelectData<T> {
 export interface PLInsertData<T> {
     changes: number
     urn: string
+    uid: string
 }
 
 export type PLInsertResult<T> = CommonResult<PLInsertData<T>>
@@ -52,8 +53,8 @@ export function emptySelectResult() {
 }
 
 export interface CommonResult<T> {
-    code : number
-    message : string
+    code: number
+    message: string
     data: T
 }
 

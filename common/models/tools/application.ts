@@ -5,7 +5,7 @@ export interface ApplicationLanguageProfile {
 }
 
 export interface ApplicationModel extends ApplicationLanguageProfile {
-    urn: string
+    uid: string
     url: string
     update_time: string
     image: string

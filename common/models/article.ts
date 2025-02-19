@@ -16,15 +16,11 @@ export interface PSArticleModel {
     channel: string
     partition: string
     path: string
-}
-
-export interface MTNoteModel extends PSArticleModel {
     uid: string
 }
 
 export interface PSArticleMetadataModel {
     uid: string
-    urn: string
     image: string
     description: string
     title: string

@@ -1,4 +1,3 @@
-
 export interface PSChannelModel {
     name: string
     create_time: string
@@ -7,15 +6,11 @@ export interface PSChannelModel {
     description: string
     image: string
     profile: string
-}
-
-export interface MTChannelModel extends PSChannelModel {
     uid: string
 }
 
 export interface PSChannelMetadataModel {
     uid: string
-    urn: string
     image: string,
     description: string,
     name: string
