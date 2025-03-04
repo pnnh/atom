@@ -42,9 +42,29 @@ export function uuidToBase58(uuidString: string) {
     return base58xrp.encode(data);
 }
 
+
+function byteArrayToUUID(byteArray: Uint8Array) {
+    if (byteArray.length !== 16) {
+        throw new Error("Byte array must be exactly 16 bytes long to form a UUID.");
+    }
+
+    // Convert each byte to a two-digit hexadecimal string
+    let hex = Array.from(byteArray, byte => byte.toString(16).padStart(2, '0')).join('');
+
+    // Insert hyphens at the correct positions to form a UUID string
+    return [
+        hex.slice(0, 8),
+        hex.slice(8, 12),
+        hex.slice(12, 16),
+        hex.slice(16, 20),
+        hex.slice(20)
+    ].join('-');
+}
+
 export function base58ToUuid(base58String: string) {
     const data = base58xrp.decode(base58String);
-    return uuidv4({random: data});
+    let uuidString = byteArrayToUUID(data);
+    return uuidString;
 }
 
 /**
