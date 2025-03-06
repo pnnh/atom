@@ -1,5 +1,5 @@
 export interface AccountModel {
-    urn: string
+    uid: string
     create_time: string
     update_time: string
     username: string
