@@ -2,14 +2,12 @@
 
 import './edit.scss'
 import React, {FormEvent, useEffect, useState} from "react";
-import {validateEmail} from "@/atom/common/utils/email";
 import {submitComment} from "@/services/client/comments/comment";
-import {isValidUrl} from "@/atom/common/utils/uri";
 import {CodeOk} from "@/atom/common/models/protocol";
 import {ButtonThrottle} from "@/atom/client/button/throttle";
 import {AccountModel} from "@/atom/common/models/account";
 import {accountSignout, getUserinfo} from "@/services/client/account/account";
-import Link from "next/link";
+import {getTurnstileToken} from "@/atom/client/components/cloudflare/turnstile";
 
 const buttonThrottle = new ButtonThrottle(5000)
 
@@ -28,9 +26,14 @@ export function EditArea({resource}: { resource: string }) {
             setInfoMsg('无效内容')
             return
         }
+        const turnstile_token = await getTurnstileToken()
+        if (!turnstile_token) {
+            setInfoMsg('请通过验证后再发布评论')
+            return
+        }
         const submitRequest = {
             userinfo,
-            email: '', nickname: '', photo, website: '', content, turnstile_token: '',
+            email: '', nickname: '', photo, website: '', content, turnstile_token,
             resource,
         }
         const submitResult = await submitComment(submitRequest)

@@ -22,7 +22,7 @@ export class ButtonThrottle {
 }
 
 export async function buttonThrottle(duration: number = 1000) {
-    console.log('Hello, Throttle!')
+    console.log('Hello, Throttle2!')
     return new Promise((resolve) => {
         setTimeout(() => {
             resolve('Throttle Done')

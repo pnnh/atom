@@ -2,6 +2,28 @@
 
 import React, {useEffect} from "react";
 import {useClientConfig} from "@/services/client/config";
+import $ from "jquery";
+
+function turnstileErrorCallback(error: string) {
+    console.log('Challenge Error', error);
+    // const overlay = $('#cfTurnstileOverlay')
+    // if (!overlay) {
+    //     return;
+    // }
+    // overlay.show()
+}
+
+function turnstileSuccessCallback(token: string) {
+    console.log('Challenge Success', token);
+    const overlay = $('#cfTurnstileOverlay')
+    if (!overlay) {
+        return;
+    }
+    overlay.hide()
+    if (window.turnstileSuccessCallback) {
+        window.turnstileSuccessCallback(token)
+    }
+}
 
 function turnstileScript() {
     let turnstileContent = document.getElementById('turnstile-content')
@@ -21,21 +43,38 @@ function turnstileScript() {
         if (!sitekey) {
             return
         }
+
         window.turnstile.render("#turnstile-content", {
             sitekey: sitekey,
-            callback: function (token: string) {
-                //console.log('Challenge Success', token);
-            },
+            language: 'zh-cn',
+            callback: turnstileSuccessCallback,
+            "error-callback": turnstileErrorCallback,
+            "expired-callback": turnstileErrorCallback,
+            "unsupported-callback": turnstileErrorCallback,
+            "timeout-callback": turnstileErrorCallback
         });
     });
 }
 
-export function getTurnstileToken(): string | undefined {
+export async function getTurnstileToken(): Promise<string | undefined> {
     const token = window.turnstile.getResponse()
     if (token && !window.turnstile.isExpired()) {
         return token
     }
-    return undefined
+    const overlay = $('#cfTurnstileOverlay')
+    if (!overlay) {
+        return;
+    }
+    overlay.show()
+    return new Promise<string | undefined>((resolve, reject) => {
+        const timer = setTimeout(() => {
+            reject(new Error(`Promise timed out after 5s`));
+        }, 5000);
+        window.turnstileSuccessCallback = (token: string) => {
+            clearTimeout(timer)
+            resolve(token)
+        }
+    })
 }
 
 export function TurnstileClient() {
