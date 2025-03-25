@@ -24,7 +24,7 @@ function turnstileSuccessCallback(token: string) {
     }
 }
 
-function turnstileScript() {
+export function turnstileScript() {
     let turnstileContent = document.getElementById('turnstile-content')
     if (turnstileContent) {
         return
