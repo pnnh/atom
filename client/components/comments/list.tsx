@@ -3,11 +3,9 @@ import {useEffect, useState} from "react";
 import {PLSelectResult} from "@/atom/common/models/protocol";
 import {PSCommentModel} from "@/atom/common/models/comment";
 import {fetchComments} from "@/atom/client/comments/comment";
-import {getPortalPublicUrl} from "@/services/client/http";
 
-export function ListArea({resource}: { resource: string }) {
+export function ListArea({portalUrl, resource}: { portalUrl: string, resource: string }) {
     const [list, setList] = useState<PLSelectResult<PSCommentModel>>()
-    const portalUrl = getPortalPublicUrl()
     useEffect(() => {
         fetchComments({portalUrl, resource}).then(result => {
             setList(result)

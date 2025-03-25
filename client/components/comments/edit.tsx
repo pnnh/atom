@@ -8,11 +8,10 @@ import {AccountModel} from "@/atom/common/models/account";
 import {getTurnstileToken} from "@/atom/client/components/cloudflare/turnstile";
 import {submitComment} from "@/atom/client/comments/comment";
 import {getUserinfo} from "@/atom/client/account/account";
-import {getPortalPublicUrl} from "@/services/client/http";
 
 const buttonThrottle = new ButtonThrottle(5000)
 
-export function EditArea({resource}: { resource: string }) {
+export function EditArea({portalUrl, resource}: { portalUrl: string, resource: string }) {
     const [content, setContent] = useState('')
     const [photo, setPhoto] = useState('')
     const [infoMsg, setInfoMsg] = useState('')
@@ -37,7 +36,6 @@ export function EditArea({resource}: { resource: string }) {
             email: '', nickname: '', photo, website: '', content, turnstile_token,
             resource,
         }
-        const portalUrl = getPortalPublicUrl()
         const submitResult = await submitComment(portalUrl, submitRequest)
         console.log('submitResult', submitResult)
         if (submitResult.code !== CodeOk) {
@@ -48,7 +46,7 @@ export function EditArea({resource}: { resource: string }) {
     }
 
     useEffect(() => {
-        getUserinfo().then((result) => {
+        getUserinfo(portalUrl).then((result) => {
             if (!result || result.code != CodeOk || !result.data) {
                 return
             }

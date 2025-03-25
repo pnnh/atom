@@ -24,7 +24,7 @@ function turnstileSuccessCallback(token: string) {
     }
 }
 
-export function turnstileScript() {
+export function turnstileScript(publicTurnstileKey: string) {
     let turnstileContent = document.getElementById('turnstile-content')
     if (turnstileContent) {
         return
@@ -38,7 +38,7 @@ export function turnstileScript() {
         }
         turnstileBody.appendChild(turnstileContent)
         // const clientConfig = useClientConfig()
-        const sitekey = 'todo'//clientConfig.PUBLIC_TURNSTILE
+        const sitekey = publicTurnstileKey//clientConfig.PUBLIC_TURNSTILE
         if (!sitekey) {
             return
         }
@@ -74,13 +74,4 @@ export async function getTurnstileToken(): Promise<string | undefined> {
             resolve(token)
         }
     })
-}
-
-export function TurnstileClient() {
-    useEffect(() => {
-        turnstileScript()
-    }, []);
-
-    return <div id={'turnstile-body'} className={'turnstileBody'}>
-    </div>
 }
