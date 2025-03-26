@@ -28,9 +28,12 @@ export interface PSArticleMetadataModel {
 }
 
 export interface PSArticleFileModel {
-    name: string
+    title: string
     path: string
-    type: string
+    is_dir: boolean
+    is_text: boolean
+    is_image: boolean
+    storage_path: string
 }
 
 export function channelName(channel: string | PSChannelModel): string {

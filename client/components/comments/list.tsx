@@ -14,7 +14,7 @@ export function ListArea({portalUrl, resource}: { portalUrl: string, resource: s
     if (!list) {
         return <div>Loading...</div>
     }
-    if (!list.data || list.data.count === 0) {
+    if (!list.data || list.data.count === 0 || !list.data.range) {
         return <div>
             暂无评论
         </div>
