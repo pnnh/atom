@@ -1,4 +1,4 @@
-import {base64url} from 'rfc4648'
+import {base64url, base32hex} from 'rfc4648'
 import {parse as uuidParse, v4 as uuidv4} from 'uuid';
 import {base58xrp,} from '@scure/base';
 import md5 from "md5";
@@ -11,6 +11,11 @@ import md5 from "md5";
 export function encodeBase64String(state: string): string {
     const enc = new TextEncoder()
     return base64url.stringify(enc.encode(state))
+}
+
+export function encodeBase32String(state: string): string {
+    const enc = new TextEncoder()
+    return base32hex.stringify(enc.encode(state))
 }
 
 /**
@@ -75,6 +80,10 @@ export function base58ToUuid(base58String: string) {
 export function stringToBase58(data: string): string {
     const enc = new TextEncoder()
     return base58xrp.encode(enc.encode(data))
+}
+
+export function encodeBase58String(state: string): string {
+    return stringToBase58(state)
 }
 
 /**

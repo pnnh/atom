@@ -29,6 +29,9 @@ export function turnstileScript(publicTurnstileKey: string) {
     if (turnstileContent) {
         return
     }
+    if (!window.turnstile) {
+        return;
+    }
     window.turnstile.ready(function () {
         turnstileContent = document.createElement('div')
         turnstileContent.id = 'turnstile-content'
@@ -56,6 +59,9 @@ export function turnstileScript(publicTurnstileKey: string) {
 }
 
 export async function getTurnstileToken(): Promise<string | undefined> {
+    if (!window.turnstile) {
+        return;
+    }
     const token = window.turnstile.getResponse()
     if (token && !window.turnstile.isExpired()) {
         return token
