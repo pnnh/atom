@@ -1,4 +1,3 @@
-
 export function getMimeType(path: string): string {
     const mimeMap: Map<string, string> = new Map<string, string>()
     mimeMap.set('txt', 'text/plain')
@@ -19,6 +18,16 @@ export type getType = typeof getMimeType
 
 export function isImageType(type: string): boolean {
     const lowerType = type.toLowerCase().trim()
+    const extName = lowerType.split('.').pop()
+    switch (extName) {
+        case 'webp':
+        case 'awebp':
+        case 'icon':
+        case 'ico':
+        case 'svg':
+        case 'bmp':
+            return true
+    }
     return lowerType.startsWith('image/') ||
         lowerType.endsWith(".jpg") ||
         lowerType.endsWith(".jpeg") ||
