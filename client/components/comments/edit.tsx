@@ -9,7 +9,7 @@ import {getTurnstileToken} from "@/atom/client/components/cloudflare/turnstile";
 import {submitComment} from "@/atom/client/comments/comment";
 import {getUserinfo} from "@/atom/client/account/account";
 
-const buttonThrottle = new ButtonThrottle(5000)
+const buttonThrottle = new ButtonThrottle(2000)
 
 export function EditArea({portalUrl, resource}: { portalUrl: string, resource: string }) {
     const [content, setContent] = useState('')
@@ -39,7 +39,7 @@ export function EditArea({portalUrl, resource}: { portalUrl: string, resource: s
         const submitResult = await submitComment(portalUrl, submitRequest)
         console.log('submitResult', submitResult)
         if (submitResult.code !== CodeOk) {
-            setInfoMsg('评论提交失败')
+            setInfoMsg('评论提交失败22')
             return
         }
         setInfoMsg('评论已提交')
@@ -66,7 +66,8 @@ export function EditArea({portalUrl, resource}: { portalUrl: string, resource: s
                 <div className={'actionsRow'}>
                     <div className={'submitArea'}>
                         <button className={'submitButton'} onClick={() => {
-                            submitForm().catch(() => {
+                            submitForm().catch((err) => {
+                                console.error('submitForm', err)
                                 setInfoMsg('评论提交失败')
                             })
                         }}>发布
