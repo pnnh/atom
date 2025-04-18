@@ -27,9 +27,11 @@ function turnstileSuccessCallback(token: string) {
 export function turnstileScript(publicTurnstileKey: string) {
     let turnstileContent = document.getElementById('turnstile-content')
     if (turnstileContent) {
+        console.error('Turnstile content not found or already exists')
         return
     }
     if (!window.turnstile) {
+        console.error('Turnstile not found')
         return;
     }
     window.turnstile.ready(function () {
@@ -37,12 +39,14 @@ export function turnstileScript(publicTurnstileKey: string) {
         turnstileContent.id = 'turnstile-content'
         const turnstileBody = document.getElementById('turnstile-body')
         if (!turnstileBody) {
+            console.error('Turnstile body not found')
             return;
         }
         turnstileBody.appendChild(turnstileContent)
         // const clientConfig = useClientConfig()
         const sitekey = publicTurnstileKey//clientConfig.PUBLIC_TURNSTILE
         if (!sitekey) {
+            console.error('Turnstile sitekey not found')
             return
         }
 

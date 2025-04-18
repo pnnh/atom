@@ -86,6 +86,10 @@ export function encodeBase58String(state: string): string {
     return stringToBase58(state)
 }
 
+export function decodeBase58String(base58State: string): string {
+    return base58ToString(base58State)
+}
+
 /**
  * 将base58编码的字符串转换为字符串
  * @param data - 待解码的base58编码的字符串
