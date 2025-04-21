@@ -13,7 +13,7 @@ function turnstileErrorCallback(error: string) {
 }
 
 function turnstileSuccessCallback(token: string) {
-    console.log('Challenge Success', token);
+    console.debug('Challenge Success', token);
     const overlay = $('#cfTurnstileOverlay')
     if (!overlay) {
         return;
