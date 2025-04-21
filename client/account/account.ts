@@ -6,23 +6,23 @@ import {PLGetResult, PLInsertResult} from "@/atom/common/models/protocol";
 
 export async function submitSignup(portalUrl: string, submitRequest: any) {
     submitRequest.fingerprint = await getVisitorId()
-    const url = `${portalUrl}/account/signup`
+    const url = `${portalUrl}/portal/account/signup`
     return await makePost(url, submitRequest) as PLInsertResult<AccountModel>
 }
 
 export async function accountSignin(portalUrl: string, submitRequest: any) {
     submitRequest.fingerprint = await getVisitorId()
-    const url = `${portalUrl}/account/signin`
+    const url = `${portalUrl}/portal/account/signin`
     return await makePost(url, submitRequest) as PLInsertResult<AccountModel>
 }
 
 export async function accountSignout(portalUrl: string, submitRequest: any) {
     submitRequest.fingerprint = await getVisitorId()
-    const url = `${portalUrl}/account/signout`
+    const url = `${portalUrl}/portal/account/signout`
     return await makePost(url, submitRequest)
 }
 
 export async function getUserinfo(portalUrl: string) {
-    const url = `${portalUrl}/account/userinfo`
+    const url = `${portalUrl}/portal/account/userinfo`
     return await makeGet(url) as PLGetResult<AccountModel>
 }
