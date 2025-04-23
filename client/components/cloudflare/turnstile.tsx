@@ -4,7 +4,7 @@ import React, {useEffect} from "react";
 import $ from "jquery";
 
 function turnstileErrorCallback(error: string) {
-    console.log('Challenge Error', error);
+    console.error('Challenge Error', error);
     // const overlay = $('#cfTurnstileOverlay')
     // if (!overlay) {
     //     return;
