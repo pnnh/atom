@@ -26,14 +26,14 @@ export function EditArea({portalUrl, resource}: { portalUrl: string, resource: s
             setInfoMsg('无效内容')
             return
         }
-        const turnstile_token = await getTurnstileToken()
-        if (!turnstile_token) {
-            setInfoMsg('请通过验证后再发布评论')
-            return
-        }
+        // const turnstile_token = await getTurnstileToken()
+        // if (!turnstile_token) {
+        //     setInfoMsg('请通过验证后再发布评论')
+        //     return
+        // }
         const submitRequest = {
             userinfo,
-            email: '', nickname: '', photo, website: '', content, turnstile_token,
+            email: '', nickname: '', photo, website: '', content, turnstile_token: '',
             resource,
         }
         const submitResult = await submitComment(portalUrl, submitRequest)

@@ -1,12 +1,46 @@
+import {uuidToBase58} from "@/atom/common/utils/basex";
+
 export interface AccountModel {
     uid: string
     create_time: string
     update_time: string
     username: string
     image: string
+    introduction: string        // 简短介绍
     description: string
     mail: string
     nickname: string
     photo: string
+    photoUrl: string
     role: string
+}
+
+export function isValidAccountModel(model: any): model is AccountModel {
+    return model && typeof model === 'object' &&
+        typeof model.uid === 'string' &&
+        typeof model.create_time === 'string' &&
+        typeof model.update_time === 'string' &&
+        typeof model.username === 'string' &&
+        typeof model.image === 'string' &&
+        typeof model.description === 'string' &&
+        typeof model.mail === 'string' &&
+        typeof model.nickname === 'string' &&
+        typeof model.photo === 'string' &&
+        typeof model.role === 'string';
+}
+
+export const anonymousAccountUid = '00000000-0000-0000-0000-000000000000';
+
+export function isAnonymousAccount(model: AccountModel | undefined | null | unknown): boolean {
+    if (!model || typeof model !== 'object') return false;
+    const modelUid = (model as any).uid;
+    if (typeof modelUid !== 'string') return false;
+    return modelUid === anonymousAccountUid;
+}
+
+export function getAccountUrn(uid: string): string {
+    if (!uid || uid.length === 0 || uid === anonymousAccountUid) {
+        return `anonymous`
+    }
+    return uuidToBase58(uid)
 }

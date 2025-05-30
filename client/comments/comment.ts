@@ -6,12 +6,12 @@ import {makeGet, makePost} from "@/atom/client/http";
 
 export async function submitComment(portalUrl: string, submitRequest: any) {
     submitRequest.fingerprint = await getVisitorId()
-    const url = `${portalUrl}/portal/comments`
+    const url = `${portalUrl}/comments`
     return await makePost(url, submitRequest) as PLInsertResult<PSCommentModel>
 }
 
 export async function fetchComments({portalUrl, resource}: { portalUrl: string, resource: string }) {
     const fingerprint = await getVisitorId()
-    const url = `${portalUrl}/portal/comments?resource=` + resource + '&fingerprint=' + fingerprint
+    const url = `${portalUrl}/comments?resource=` + resource + '&fingerprint=' + fingerprint
     return await makeGet<PLSelectResult<PSCommentModel>>(url)
 }
