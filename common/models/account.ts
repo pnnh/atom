@@ -30,6 +30,20 @@ export function isValidAccountModel(model: any): model is AccountModel {
 }
 
 export const anonymousAccountUid = '00000000-0000-0000-0000-000000000000';
+export const anonymousAccount: AccountModel = {
+    uid: anonymousAccountUid,
+    create_time: '',
+    update_time: '',
+    username: 'anonymous',
+    image: '',
+    introduction: '',
+    description: '',
+    mail: '',
+    nickname: '匿名用户',
+    photo: '',
+    photoUrl: '',
+    role: 'anonymous'
+}
 
 export function isAnonymousAccount(model: AccountModel | undefined | null | unknown): boolean {
     if (!model || typeof model !== 'object') return false;

@@ -58,3 +58,5 @@ export interface CommonResult<T> {
     data: T
 }
 
+// 表示未知操作占位符
+export const SymbolUnknown = Symbol('unknown')

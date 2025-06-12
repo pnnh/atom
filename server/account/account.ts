@@ -5,7 +5,7 @@ import {CodeOk, PLGetResult, PLInsertResult} from "@/atom/common/models/protocol
 import {serverMakeGet} from "@/atom/server/http";
 import {getDefaultImageUrl} from "@/services/common/note";
 
-export async function serverGetUserinfo(portalUrl: string) {
+export async function serverGetUserinfo(portalUrl: string): Promise<AccountModel> {
     const url = `${portalUrl}/account/userinfo`
     const getResult = await serverMakeGet(url) as PLGetResult<AccountModel>
     if (!getResult || getResult.code !== CodeOk || !getResult.data) {
