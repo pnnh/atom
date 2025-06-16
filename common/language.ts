@@ -21,12 +21,12 @@ export function isLanguageZh(lang: string): boolean {
     return lang === langZh || lang.startsWith(`${langZh}-`)
 }
 
-export function getLanguageFromPathname(pathname: string): string {
+export function getLanguageFromPathname(pathname: string): string | undefined {
     const segments = pathname.split('/')
     if (segments.length > 1 && isSupportedLanguage(segments[1])) {
         return segments[1]
     }
-    return defaultLanguage
+    return undefined
 }
 
 export function replaceLanguageInPathname(pathname: string, lang: string): string {
