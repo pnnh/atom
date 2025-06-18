@@ -33,18 +33,21 @@ export function replaceLanguageInPathname(pathname: string, lang: string): strin
     if (!isSupportedLanguage(lang)) {
         lang = defaultLanguage
     }
-    if (pathname === '/') {
-        if (lang === defaultLanguage) {
-            return '/'
-        } else {
-            return `/${lang}/`
-        }
-    }
+    // if (pathname === '/') {
+    //     if (lang === defaultLanguage) {
+    //         return '/'
+    //     } else {
+    //         return `/${lang}`
+    //     }
+    // }
     const segments = pathname.split('/')
     if (segments.length > 1 && isSupportedLanguage(segments[1])) {
         segments[1] = lang
     } else {
         segments.splice(1, 0, lang)
     }
-    return segments.join('/')
+    const newPath = segments.join('/')
+    if (newPath.endsWith('/'))
+        return newPath.substring(0, newPath.length - 1) // 去掉最后的斜杠
+    return newPath
 }

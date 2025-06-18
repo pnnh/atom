@@ -8,10 +8,15 @@ import {AccountModel} from "@/atom/common/models/account";
 import {getTurnstileToken} from "@/atom/client/components/cloudflare/turnstile";
 import {submitComment} from "@/atom/client/comments/comment";
 import {getUserinfo} from "@/atom/client/account/account";
+import {ILanguageProvider} from "@/services/common/language";
 
 const buttonThrottle = new ButtonThrottle(2000)
 
-export function EditArea({portalUrl, resource}: { portalUrl: string, resource: string }) {
+export function EditArea({langProvider, portalUrl, resource}: {
+    langProvider: ILanguageProvider,
+    portalUrl: string,
+    resource: string
+}) {
     const [content, setContent] = useState('')
     const [photo, setPhoto] = useState('')
     const [infoMsg, setInfoMsg] = useState('')
@@ -19,7 +24,7 @@ export function EditArea({portalUrl, resource}: { portalUrl: string, resource: s
 
     const submitForm = async () => {
         if (!await buttonThrottle.throttle()) {
-            setInfoMsg('操作过于频繁')
+            setInfoMsg(langProvider.frequentOperation)
             return
         }
         if (!content) {
