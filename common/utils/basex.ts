@@ -1,7 +1,8 @@
-import {base64url, base32hex} from 'rfc4648'
+import {base32hex, base64url} from 'rfc4648'
 import {parse as uuidParse, v4 as uuidv4} from 'uuid';
 import {base58xrp,} from '@scure/base';
 import md5 from "md5";
+import {uuidV7} from "@/atom/common/utils/uuid";
 
 /**
  * 将字符串转换为base64编码的字符串
@@ -42,6 +43,7 @@ export function stringToUuid(uuidString: string) {
 }
 
 export function uuidToBase58(uuidString: string) {
+    console.debug('uuidToBase58', uuidString)
     const data = uuidParse(uuidString);
     // 需要和服务器上的实现保持一致
     return base58xrp.encode(data);
@@ -66,10 +68,14 @@ function byteArrayToUUID(byteArray: Uint8Array) {
     ].join('-');
 }
 
-export function base58ToUuid(base58String: string) {
-    const data = base58xrp.decode(base58String);
-    let uuidString = byteArrayToUUID(data);
-    return uuidString;
+export function base58ToUuid(base58String: string): string | undefined {
+    try {
+        const data = base58xrp.decode(base58String);
+        return byteArrayToUUID(data);
+    } catch (e) {
+        console.error('Error converting base58 to UUID:', base58String, e);
+        return undefined; // 或者抛出错误
+    }
 }
 
 /**

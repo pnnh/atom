@@ -9,8 +9,9 @@ export function encodeMD5(data: string) {
     return md5(data).toString();
 }
 
-export function encodeMD5Format(data: string) {
-    const value = md5(data).toString();
-    // 32位小写，UUID格式
-    return `${value.substr(0, 8)}-${value.substr(8, 4)}-${value.substr(12, 4)}-${value.substr(16, 4)}-${value.substr(20, 12)}`;
-}
+// 该使用方式生成的类UUID字符串并不合法
+// export function encodeMD5Format(data: string) {
+//     const value = md5(data).toString();
+//     // 32位小写，UUID格式
+//     return `${value.substr(0, 8)}-${value.substr(8, 4)}-${value.substr(12, 4)}-${value.substr(16, 4)}-${value.substr(20, 12)}`;
+// }
