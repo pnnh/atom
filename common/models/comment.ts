@@ -1,5 +1,5 @@
 export interface PSCommentModel {
-    urn: string;
+    uid: string;
     title?: string;
     content: string;
     create_time: string;

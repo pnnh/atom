@@ -1,5 +1,5 @@
 export interface NCChannelModel {
-    urn: string
+    uid: string
     name: string
     create_time: string
     update_time: string

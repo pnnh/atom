@@ -29,7 +29,6 @@ export interface PLSelectData<T> {
 
 export interface PLInsertData<T> {
     changes: number
-    urn: string
     uid: string
 }
 

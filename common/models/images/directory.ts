@@ -1,5 +1,5 @@
 export interface NPDirectoryModel {
-    urn: string
+    uid: string
     album: string
     album_name: string
     children: NPDirectoryModel[]

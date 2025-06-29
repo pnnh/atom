@@ -1,5 +1,5 @@
 export interface NPAlbumModel {
-    urn:string
+    uid:string
     image: string
     owner_name: string
     profile: string
