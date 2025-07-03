@@ -5,15 +5,12 @@ import React, {FormEvent, useEffect, useState} from "react";
 import {CodeOk} from "@/atom/common/models/protocol";
 import {ButtonThrottle} from "@/atom/client/button/throttle";
 import {AccountModel} from "@/atom/common/models/account";
-import {getTurnstileToken} from "@/atom/client/components/cloudflare/turnstile";
 import {submitComment} from "@/atom/client/comments/comment";
 import {getUserinfo} from "@/atom/client/account/account";
-import {ILanguageProvider} from "@/services/common/language";
 
 const buttonThrottle = new ButtonThrottle(2000)
 
-export function EditArea({langProvider, portalUrl, resource}: {
-    langProvider: ILanguageProvider,
+export function EditArea({portalUrl, resource}: {
     portalUrl: string,
     resource: string
 }) {
@@ -24,7 +21,7 @@ export function EditArea({langProvider, portalUrl, resource}: {
 
     const submitForm = async () => {
         if (!await buttonThrottle.throttle()) {
-            setInfoMsg(langProvider.frequentOperation)
+            setInfoMsg('frequent operation')
             return
         }
         if (!content) {
