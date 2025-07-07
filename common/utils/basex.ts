@@ -2,7 +2,6 @@ import {base32hex, base64url} from 'rfc4648'
 import {parse as uuidParse, v4 as uuidv4} from 'uuid';
 import {base58xrp,} from '@scure/base';
 import md5 from "md5";
-import {uuidV7} from "@/atom/common/utils/uuid";
 
 /**
  * 将字符串转换为base64编码的字符串
@@ -35,6 +34,10 @@ export function binaryToBase58String(data: Uint8Array): string {
 }
 
 export function generateUuid(): string {
+    return uuidv4();
+}
+
+export function generateUuidV7(): string {
     return uuidv4();
 }
 
