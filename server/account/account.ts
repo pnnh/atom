@@ -17,7 +17,7 @@ export async function serverGetUserinfo(portalUrl: string): Promise<AccountModel
     }
     if (userInfo.photo) {
         userInfo.photoUrl = userInfo.photo.startsWith('http://') || userInfo.photo.startsWith("https://") ?
-            userInfo.photo : `${portalUrl}/storage/${userInfo.photo}`
+            userInfo.photo : `${portalUrl}/storage${userInfo.photo}`
     } else {
         userInfo.photoUrl = getDefaultImageUrl()
     }
