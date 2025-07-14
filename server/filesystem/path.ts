@@ -8,7 +8,7 @@ export function resolvePath(path: string): string {
         newPath = newPath.replace(filePrefix, '')
     }
     if (newPath.startsWith("~/")) {
-        newPath = newPath.replace("~/", process.env.HOME + "/")
+        newPath = newPath.replace("~/", process.env['HOME'] + "/")
     } else if (newPath.startsWith("./")) {
         newPath = newPath.replace("./", process.cwd() + "/")
     } else if (newPath.startsWith("workdir://")) {

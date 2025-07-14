@@ -1,12 +1,12 @@
 'use server'
 
 
-import {cookies} from "next/headers";
+// import {cookies} from "next/headers";
 
 export async function serverMakePost<T>(url: string, params: unknown): Promise<T> {
 
-    const cookieStore = await cookies()
-    const authHeader = cookieStore.toString()
+    // const cookieStore = await cookies()
+    const authHeader = ''//cookieStore.toString()
 
     const response = await fetch(url, {
         credentials: 'include',
@@ -23,8 +23,8 @@ export async function serverMakePost<T>(url: string, params: unknown): Promise<T
 
 export async function serverMakeGet<T>(url: string): Promise<T> {
 
-    const cookieStore = await cookies()
-    const authHeader = cookieStore.toString()
+    // const cookieStore = await cookies()
+    const authHeader = ''// cookieStore.toString()
 
     const response = await fetch(url, {
         credentials: 'include',

@@ -46,7 +46,7 @@ export function tokenToNode(token: Token): SteleNode {
             node = {
                 id: generatorRandomString(8),
                 name: 'list',
-                text: 'text' in token ? token.text : '',
+                text: 'text' in token ? token.type : '',
                 raw: token.raw,
                 ordered: token.ordered,
                 start: token.start,
