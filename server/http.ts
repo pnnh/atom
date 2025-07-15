@@ -1,13 +1,6 @@
 'use server'
 
-
-// import {cookies} from "next/headers";
-
-export async function serverMakePost<T>(url: string, params: unknown): Promise<T> {
-
-    // const cookieStore = await cookies()
-    const authHeader = ''//cookieStore.toString()
-
+export async function serverMakePost<T>(url: string, params: unknown, authHeader: string): Promise<T> {
     const response = await fetch(url, {
         credentials: 'include',
         method: 'POST',
@@ -21,11 +14,7 @@ export async function serverMakePost<T>(url: string, params: unknown): Promise<T
     return response.json()
 }
 
-export async function serverMakeGet<T>(url: string): Promise<T> {
-
-    // const cookieStore = await cookies()
-    const authHeader = ''// cookieStore.toString()
-
+export async function serverMakeGet<T>(url: string, authHeader: string): Promise<T> {
     const response = await fetch(url, {
         credentials: 'include',
         method: 'GET',
