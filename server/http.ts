@@ -1,5 +1,18 @@
 'use server'
 
+export async function serverMakeGet<T>(url: string, authHeader: string): Promise<T> {
+    const response = await fetch(url, {
+        credentials: 'include',
+        method: 'GET',
+        headers: {
+            Cookie: authHeader,
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        }
+    })
+    return response.json()
+}
+
 export async function serverMakePost<T>(url: string, params: unknown, authHeader: string): Promise<T> {
     const response = await fetch(url, {
         credentials: 'include',
@@ -14,15 +27,29 @@ export async function serverMakePost<T>(url: string, params: unknown, authHeader
     return response.json()
 }
 
-export async function serverMakeGet<T>(url: string, authHeader: string): Promise<T> {
+export async function serverMakePut<T>(url: string, params: unknown, authHeader: string): Promise<T> {
     const response = await fetch(url, {
         credentials: 'include',
-        method: 'GET',
+        method: 'PUT',
         headers: {
             Cookie: authHeader,
             Accept: 'application/json',
             'Content-Type': 'application/json',
-        }
+        },
+        body: JSON.stringify(params),
+    })
+    return response.json()
+}
+
+export async function serverMakeDelete<T>(url: string, authHeader: string): Promise<T> {
+    const response = await fetch(url, {
+        credentials: 'include',
+        method: 'DELETE',
+        headers: {
+            Cookie: authHeader,
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
     })
     return response.json()
 }

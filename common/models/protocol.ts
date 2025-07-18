@@ -27,16 +27,13 @@ export interface PLSelectData<T> {
     range: T[]
 }
 
-export interface PLInsertData<T> {
-    changes: number
-    uid: string
-}
-
-export type PLInsertResult<T> = CommonResult<PLInsertData<T>>
-
 export type PLSelectResult<T> = CommonResult<PLSelectData<T>>
 
 export type PLGetResult<T> = CommonResult<T>
+
+export type PLInsertResult = CommonResult<string>
+export type PLDeleteResult = CommonResult<string>
+export type PLUpdateResult = CommonResult<string>
 
 export function emptySelectResult() {
     return {

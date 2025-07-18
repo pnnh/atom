@@ -1,4 +1,5 @@
 import {uuidToBase58} from "@/atom/common/utils/basex";
+import {EmptyUUID} from "@/atom/common/utils/uuid";
 
 export interface AccountModel {
     uid: string
@@ -29,7 +30,7 @@ export function isValidAccountModel(model: any): model is AccountModel {
         typeof model.role === 'string';
 }
 
-export const anonymousAccountUid = '00000000-0000-0000-0000-000000000000';
+export const anonymousAccountUid = EmptyUUID;
 export const anonymousAccount: AccountModel = {
     uid: anonymousAccountUid,
     create_time: '',

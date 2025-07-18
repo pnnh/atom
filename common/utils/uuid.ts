@@ -22,3 +22,5 @@ export function uuidV6() {
 export function uuidV7() {
     return uuidv7()
 }
+
+export const EmptyUUID = NIL;
