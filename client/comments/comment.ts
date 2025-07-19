@@ -7,7 +7,7 @@ import {clientMakeGet, clientMakePost} from "@/atom/client/http";
 export async function submitComment(portalUrl: string, submitRequest: any) {
     submitRequest.fingerprint = await getVisitorId()
     const url = `${portalUrl}/comments`
-    return await clientMakePost(url, submitRequest) as PLInsertResult<PSCommentModel>
+    return await clientMakePost(url, submitRequest) as PLInsertResult
 }
 
 export async function fetchComments({portalUrl, resource}: { portalUrl: string, resource: string }) {
