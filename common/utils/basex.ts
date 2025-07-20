@@ -41,17 +41,26 @@ export function generateUuidV7(): string {
     return uuidv4();
 }
 
+// Deprecated: Use `isValidUuid` instead
 export function stringToUuid(uuidString: string) {
     return uuidParse(uuidString).toString();
 }
 
+// Check if a string is a valid UUID
+export function isValidUuid(uuidString: string): boolean {
+    try {
+        stringToUuid(uuidString);
+        return true;
+    } catch (e) {
+        return false;
+    }
+}
+
 export function uuidToBase58(uuidString: string) {
-    console.debug('uuidToBase58', uuidString)
     const data = uuidParse(uuidString);
     // 需要和服务器上的实现保持一致
     return base58xrp.encode(data);
 }
-
 
 function byteArrayToUUID(byteArray: Uint8Array) {
     if (byteArray.length !== 16) {
@@ -73,12 +82,15 @@ function byteArrayToUUID(byteArray: Uint8Array) {
 
 export function base58ToUuid(base58String: string): string | undefined {
     try {
-        const data = base58xrp.decode(base58String);
-        return byteArrayToUUID(data);
+        return mustBase58ToUuid(base58String);
     } catch (e) {
-        console.error('Error converting base58 to UUID:', base58String, e);
         return undefined; // 或者抛出错误
     }
+}
+
+export function mustBase58ToUuid(base58String: string): string | undefined {
+    const data = base58xrp.decode(base58String);
+    return byteArrayToUUID(data);
 }
 
 /**
@@ -115,7 +127,5 @@ export function base58ToString(data: string): string {
  * @returns md5字符串
  */
 export function stringToMd5(data: string): string {
-    const hash = md5(data)
-    // 在md5字符串中间插入连字符
-    return hash.slice(0, 8) + '-' + hash.slice(8, 12) + '-' + hash.slice(12, 16) + '-' + hash.slice(16, 20) + '-' + hash.slice(20)
+    return md5(data)
 }

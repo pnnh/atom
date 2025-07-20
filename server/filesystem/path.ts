@@ -1,18 +1,22 @@
+'use server'
 
 import fs from "fs";
+import os from "os";
+import path from "path";
 
-export function resolvePath(path: string): string {
+export function resolvePath(relatePath: string): string {
     const filePrefix = 'file://'
-    let newPath = path
+    let newPath = relatePath
     if (newPath.startsWith(filePrefix)) {
         newPath = newPath.replace(filePrefix, '')
     }
     if (newPath.startsWith("~/")) {
-        newPath = newPath.replace("~/", process.env['HOME'] + "/")
+        const homeDir = os.homedir()
+        newPath = newPath.replace("~/", homeDir + path.sep)
     } else if (newPath.startsWith("./")) {
-        newPath = newPath.replace("./", process.cwd() + "/")
+        newPath = newPath.replace("./", process.cwd() + path.sep)
     } else if (newPath.startsWith("workdir://")) {
-        newPath = newPath.replace("workdir://", process.cwd() + "/")
+        newPath = newPath.replace("workdir://", process.cwd() +  + path.sep)
     }
     return newPath
 }
