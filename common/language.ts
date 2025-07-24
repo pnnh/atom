@@ -1,6 +1,6 @@
 export const langEn = 'en'
 export const langZh = 'zh'
-export const defaultLanguage = langEn
+export const defaultLanguage = langZh
 export const supportedLanguages = [langEn, langZh]
 
 export function isSupportedLanguage(lang: string): boolean {
@@ -50,4 +50,14 @@ export function replaceLanguageInPathname(pathname: string, lang: string): strin
     if (newPath.endsWith('/'))
         return newPath.substring(0, newPath.length - 1) // 去掉最后的斜杠
     return newPath
+}
+
+export function localText(lang: string, zhText: string, enText: string): string {
+    if (isLanguageEn(lang)) {
+        return enText
+    } else if (isLanguageZh(lang)) {
+        return zhText
+    } else {
+        return enText // Default to English if language is not recognized
+    }
 }

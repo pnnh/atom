@@ -88,8 +88,11 @@ export function base58ToUuid(base58String: string): string | undefined {
     }
 }
 
-export function mustBase58ToUuid(base58String: string): string | undefined {
+export function mustBase58ToUuid(base58String: string): string {
     const data = base58xrp.decode(base58String);
+    if (!data) {
+        throw new Error("Invalid base58 string for UUID conversion.");
+    }
     return byteArrayToUUID(data);
 }
 
