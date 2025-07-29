@@ -24,3 +24,11 @@ export function uuidV7() {
 }
 
 export const EmptyUUID = NIL;
+
+export function isEmptyUUID(uuid: string) {
+    if (!uuid) {
+        return true;
+    }
+    uuid = uuid.trim()
+    return uuid === EmptyUUID || uuid === '' || uuid === '00000000-0000-0000-0000-000000000000';
+}
