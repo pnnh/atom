@@ -1,5 +1,3 @@
-'use server'
-
 import fs from "fs";
 import os from "os";
 import path from "path";
@@ -16,7 +14,7 @@ export function resolvePath(relatePath: string): string {
     } else if (newPath.startsWith("./")) {
         newPath = newPath.replace("./", process.cwd() + path.sep)
     } else if (newPath.startsWith("workdir://")) {
-        newPath = newPath.replace("workdir://", process.cwd() +  + path.sep)
+        newPath = newPath.replace("workdir://", process.cwd() + path.sep)
     }
     return newPath
 }
