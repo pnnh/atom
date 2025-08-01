@@ -8,14 +8,28 @@ import md5 from "md5";
  * @param state - 待编码的字符串
  * @returns base64编码的字符串
  */
-export function encodeBase64String(state: string): string {
-    const enc = new TextEncoder()
-    return base64url.stringify(enc.encode(state))
+export function encodeBase64String(state: string | unknown): string {
+    if (typeof state !== 'string') {
+        throw new Error(`encodeBase64String error: state must be a string, got ${typeof state}`);
+    }
+    try {
+        const enc = new TextEncoder()
+        return base64url.stringify(enc.encode(state))
+    } catch (e) {
+        throw new Error(`encodeBase64String encode error: ${state} : ${e}`);
+    }
 }
 
-export function encodeBase32String(state: string): string {
-    const enc = new TextEncoder()
-    return base32hex.stringify(enc.encode(state))
+export function encodeBase32String(state: string | unknown): string {
+    if (typeof state !== 'string') {
+        throw new Error(`encodeBase32String error: state must be a string, got ${typeof state}`);
+    }
+    try {
+        const enc = new TextEncoder()
+        return base32hex.stringify(enc.encode(state))
+    } catch (e) {
+        throw new Error(`encodeBase32String encode error: ${state} : ${e}`);
+    }
 }
 
 /**
@@ -24,13 +38,21 @@ export function encodeBase32String(state: string): string {
  * @returns 解码后的字符串
  */
 export function decodeBase64String(base64State: string): string {
-    const stateData = base64url.parse(base64State)
-    const decoder = new TextDecoder()
-    return decoder.decode(stateData)
+    try {
+        const stateData = base64url.parse(base64State)
+        const decoder = new TextDecoder()
+        return decoder.decode(stateData)
+    } catch (e) {
+        throw new Error(`decodeBase64String decode error: ${base64State} : ${e}`);
+    }
 }
 
 export function binaryToBase58String(data: Uint8Array): string {
-    return base58xrp.encode(data)
+    try {
+        return base58xrp.encode(data)
+    } catch (e) {
+        throw new Error(`binaryToBase58String encode error: ${data} : ${e}`);
+    }
 }
 
 export function generateUuid(): string {
@@ -43,7 +65,11 @@ export function generateUuidV7(): string {
 
 // Deprecated: Use `isValidUuid` instead
 export function stringToUuid(uuidString: string) {
-    return uuidParse(uuidString).toString();
+    try {
+        return uuidParse(uuidString).toString();
+    } catch (e) {
+        throw new Error(`stringToUuid Invalid UUID string: ${uuidString}`);
+    }
 }
 
 // Check if a string is a valid UUID
@@ -52,14 +78,19 @@ export function isValidUuid(uuidString: string): boolean {
         stringToUuid(uuidString);
         return true;
     } catch (e) {
+        console.warn(`isValidUuid Invalid UUID string: ${uuidString}`, e);
         return false;
     }
 }
 
 export function uuidToBase58(uuidString: string) {
-    const data = uuidParse(uuidString);
-    // 需要和服务器上的实现保持一致
-    return base58xrp.encode(data);
+    try {
+        const data = uuidParse(uuidString);
+        // 需要和服务器上的实现保持一致
+        return base58xrp.encode(data);
+    } catch (e) {
+        throw new Error(`uuidToBase58 Invalid UUID string: ${uuidString}`);
+    }
 }
 
 function byteArrayToUUID(byteArray: Uint8Array) {
@@ -80,20 +111,25 @@ function byteArrayToUUID(byteArray: Uint8Array) {
     ].join('-');
 }
 
-export function base58ToUuid(base58String: string): string | undefined {
+export function tryBase58ToUuid(base58String: string): string | undefined {
     try {
         return mustBase58ToUuid(base58String);
     } catch (e) {
+        console.warn(`base58ToUuid Invalid base58 string: ${base58String}`, e);
         return undefined; // 或者抛出错误
     }
 }
 
 export function mustBase58ToUuid(base58String: string): string {
-    const data = base58xrp.decode(base58String);
-    if (!data) {
-        throw new Error("Invalid base58 string for UUID conversion.");
+    try {
+        const data = base58xrp.decode(base58String);
+        if (data) {
+            return byteArrayToUUID(data);
+        }
+    } catch (e) {
+        throw new Error(`mustBase58ToUuid decode error: ${base58String} : ${e}`);
     }
-    return byteArrayToUUID(data);
+    throw new Error(`mustBase58ToUuid Invalid base58 string: ${base58String}`);
 }
 
 /**
@@ -102,8 +138,12 @@ export function mustBase58ToUuid(base58String: string): string {
  * @returns base58编码的字符串
  */
 export function stringToBase58(data: string): string {
-    const enc = new TextEncoder()
-    return base58xrp.encode(enc.encode(data))
+    try {
+        const enc = new TextEncoder()
+        return base58xrp.encode(enc.encode(data))
+    } catch (e) {
+        throw new Error(`stringToBase58 encode error: ${data} : ${e}`);
+    }
 }
 
 export function encodeBase58String(state: string): string {
@@ -120,8 +160,12 @@ export function decodeBase58String(base58State: string): string {
  * @returns 解码后的字符串
  */
 export function base58ToString(data: string): string {
-    const dec = new TextDecoder()
-    return dec.decode(base58xrp.decode(data))
+    try {
+        const dec = new TextDecoder()
+        return dec.decode(base58xrp.decode(data))
+    } catch (e) {
+        throw new Error(`base58ToString decode error: ${data} : ${e}`);
+    }
 }
 
 /**
@@ -130,5 +174,9 @@ export function base58ToString(data: string): string {
  * @returns md5字符串
  */
 export function stringToMd5(data: string): string {
-    return md5(data)
+    try {
+        return md5(data)
+    } catch (e) {
+        throw new Error(`stringToMd5 encode error: ${data} : ${e}`);
+    }
 }
