@@ -89,7 +89,7 @@ export function uuidToBase58(uuidString: string) {
         // 需要和服务器上的实现保持一致
         return base58xrp.encode(data);
     } catch (e) {
-        throw new Error(`uuidToBase58 Invalid UUID string: ${uuidString}`);
+        throw new Error(`uuidToBase58 Invalid UUID string -> ${uuidString} -> ${e}`);
     }
 }
 
