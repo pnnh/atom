@@ -7,18 +7,25 @@ export function isSupportedLanguage(lang: string): boolean {
     return supportedLanguages.includes(lang)
 }
 
-export function isLanguageEn(lang: string): boolean {
+export function isLangEn(lang: string): boolean {
     if (!lang) {
         return false
     }
     return lang === langEn || lang.startsWith(`${langEn}-`)
 }
 
-export function isLanguageZh(lang: string): boolean {
+export function isLangZh(lang: string): boolean {
     if (!lang) {
         return false
     }
     return lang === langZh || lang.startsWith(`${langZh}-`)
+}
+
+export function getLangDefault(lang: string): string {
+    if (isSupportedLanguage(lang)) {
+        return lang
+    }
+    return defaultLanguage
 }
 
 export function getLanguageFromPathname(pathname: string): string | undefined {
@@ -53,9 +60,9 @@ export function replaceLanguageInPathname(pathname: string, lang: string): strin
 }
 
 export function localText(lang: string, zhText: string, enText: string): string {
-    if (isLanguageEn(lang)) {
+    if (isLangEn(lang)) {
         return enText
-    } else if (isLanguageZh(lang)) {
+    } else if (isLangZh(lang)) {
         return zhText
     } else {
         return enText // Default to English if language is not recognized
