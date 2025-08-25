@@ -1,7 +1,8 @@
 export const langEn = 'en'
 export const langZh = 'zh'
-export const defaultLanguage = langZh
-export const supportedLanguages = [langEn, langZh]
+export const langZhant = 'zhant' // Traditional Chinese
+export const defaultLanguage = langEn
+export const supportedLanguages = [langEn, langZh, langZhant]
 
 export function isSupportedLanguage(lang: string): boolean {
     return supportedLanguages.includes(lang)
