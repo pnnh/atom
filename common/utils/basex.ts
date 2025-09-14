@@ -78,7 +78,7 @@ export function isValidUuid(uuidString: string): boolean {
         stringToUuid(uuidString);
         return true;
     } catch (e) {
-        console.warn(`isValidUuid Invalid UUID string: ${uuidString}`, e);
+        // console.warn(`isValidUuid Invalid UUID string: ${uuidString}`, e);
         return false;
     }
 }
