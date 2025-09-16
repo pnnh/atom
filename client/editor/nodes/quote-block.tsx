@@ -1,50 +1,53 @@
-import React, { KeyboardEvent } from 'react'
-import { SFText } from './node'
-import { ReactEditor, useSlate } from 'slate-react'
+'use client'
+
+import React, {KeyboardEvent} from 'react'
+import {SFText} from './node'
+import {ReactEditor, useSlate} from 'slate-react'
 import {
-  Element as SlateElement,
-  Transforms
+    Element as SlateElement,
+    Transforms
 } from 'slate'
-import { NewTextNode, TextName } from './text'
-import { selectNodeLast } from '../helpers'
+import {NewTextNode, TextName} from './text'
+import {selectNodeLast} from '../helpers'
 
 export const QuoteBlockName = 'quote-block'
 
-export function SFQuoteBlockToolbar (props: { node: SFQuoteBlockNode }) {
-  const editor = useSlate() as ReactEditor
-  const quoteBlock = NewQuoteBlockNode('')
-  const className = 'icon-button size-normal'
+export function SFQuoteBlockToolbar(props: { node: SFQuoteBlockNode }) {
+    const editor = useSlate() as ReactEditor
+    const quoteBlock = NewQuoteBlockNode('')
+    const className = 'icon-button size-normal'
 
-  return <><button title='引用块' className={className}
-                   onMouseDown={(event: React.MouseEvent) => {
-                     event.preventDefault()
+    return <>
+        <button title='引用块' className={className}
+                onMouseDown={(event: React.MouseEvent) => {
+                    event.preventDefault()
 
-                     selectNodeLast(editor, props.node)
-                     Transforms.insertNodes(
-                       editor,
-                       quoteBlock
-                     )
-                   }}><i className="ri-chat-quote-line"></i></button>
-  </>
+                    selectNodeLast(editor, props.node)
+                    Transforms.insertNodes(
+                        editor,
+                        quoteBlock
+                    )
+                }}><i className="ri-chat-quote-line"></i></button>
+    </>
 }
 
 export interface SFQuoteBlockNode extends SlateElement {
-  name: string;
-  children: SFText[];
+    name: string;
+    children: SFText[];
 }
 
-export function NewQuoteBlockNode (text: string): SFQuoteBlockNode {
-  return {
-    name: QuoteBlockName,
-    children: [NewTextNode(text)]
-  }
+export function NewQuoteBlockNode(text: string): SFQuoteBlockNode {
+    return {
+        name: QuoteBlockName,
+        children: [NewTextNode(text)]
+    }
 }
 
-export function SFQuoteBlockView (props: { attributes: any, children: any, node: SFQuoteBlockNode }) {
+export function SFQuoteBlockView(props: { attributes: any, children: any, node: SFQuoteBlockNode }) {
 
-  return <div className={'styleQuoteBlock'} data-name={QuoteBlockName} {...props.attributes}>
-    <blockquote>
-      {props.children}
-    </blockquote>
-  </div>
+    return <div className={'styleQuoteBlock'} data-name={QuoteBlockName} {...props.attributes}>
+        <blockquote>
+            {props.children}
+        </blockquote>
+    </div>
 }

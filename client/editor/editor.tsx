@@ -1,3 +1,5 @@
+'use client'
+
 import React, {ClipboardEvent, JSX, useCallback, useMemo, useState} from 'react'
 import {Editable, ReactEditor, RenderElementProps, RenderLeafProps, Slate, withReact} from 'slate-react'
 import {

@@ -1,3 +1,5 @@
+'use client'
+
 import React, {useState} from 'react'
 import {SFElement} from './node'
 import {ReactEditor, useSlate} from 'slate-react'
@@ -11,6 +13,7 @@ import {
     Transforms
 } from 'slate'
 import {selectNodeLast} from '../helpers'
+import {css} from "@emotion/css";
 
 export const CodeBlockName = 'code-block'
 export const CodeName = 'code'
@@ -38,9 +41,18 @@ export function NewCodeBlockNode(language: string, text: string): SFCodeBlockNod
     return block
 }
 
+const codeBlockStyle = css({
+    background: '#f6f6f6',
+    borderRadius: '4px',
+    padding: '8px',
+    margin: '8px 0',
+    lineHeight: '24px',
+    position: 'relative',
+})
+
 export function SFCodeBlockView(props: { attributes: any, children: any, node: SFCodeBlockNode }) {
 
-    return <pre data-name={CodeBlockName} className={'codeBlock'}
+    return <pre data-name={CodeBlockName} className={codeBlockStyle}
                 {...props.attributes}>
             <SelectLanguage element={props.node}/>
         {props.children}
@@ -92,10 +104,16 @@ export function SFCodeBlockToolbar(props: { node: SlateNode }) {
                    }}><i className={'ri-terminal-box-line'}></i></button>
 }
 
+const selectLanguageStyle = css({
+    float: 'right',
+    position: 'relative',
+    top: '4px',
+})
+
 function SelectLanguage(props: { element: SFCodeBlockNode }) {
     const editor = useSlate() as BaseEditor
     const [language, setLanguage] = useState<string>(props.element.language)
-    return <select name="select" value={language} className={'selectLanguage'}
+    return <select name="select" value={language} className={selectLanguageStyle}
                    onChange={(event) => {
                        console.debug('Select Language', editor, event)
                        if (event.target.value) {
