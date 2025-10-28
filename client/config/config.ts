@@ -2,7 +2,11 @@
 
 import {decodeBase58String} from "@/atom/common/utils/basex";
 
-export function useClientConfig() {
+export function useClientConfig(encodedBrowserConfig?: string): any {
+    if (encodedBrowserConfig) {
+        const configText = decodeBase58String(encodedBrowserConfig)
+        return JSON.parse(configText)
+    }
     const lgEnv = document.getElementById('LGEnv') as HTMLInputElement
     if (!lgEnv) {
         throw Error('没有找到 LGEnv 元素，无法获取配置')
