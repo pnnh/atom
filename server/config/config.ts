@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 
 import {IServerConfigStore} from "@/atom/server/config/store";
 import {GalaxyConfigStore} from "@/atom/server/config/galaxy";
+import {PgConfigStore} from "@/atom/server/config/pgstore";
 
 export class FileConfigStore implements IServerConfigStore {
     private configRecord: Record<string, any> = {};
@@ -62,7 +63,7 @@ export interface ConfigOptions {
     svc: string
 }
 
-export function initAppConfig(configUrl: string, options: ConfigOptions): IServerConfigStore {
+export async function initAppConfig(configUrl: string, options: ConfigOptions): Promise<IServerConfigStore> {
     if (!configUrl) {
         throw new Error('configUrl is required')
     }
@@ -82,6 +83,8 @@ export function initAppConfig(configUrl: string, options: ConfigOptions): IServe
     if (configUrl.startsWith("galaxy://")) {
         const galaxyUrl = configUrl.replace("galaxy://", "http://");
         return new GalaxyConfigStore(galaxyUrl, options);
+    } else if (configUrl.startsWith("postgres://")) {
+        return await PgConfigStore.NewPgConfigStore(configUrl, options)
     }
     return new FileConfigStore(configUrl);
 }
