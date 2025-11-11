@@ -47,7 +47,7 @@ export async function pgQueryOneFor(dbName: string, query: string, params: any =
 //     `
 
     const queryResult = await db.one(query, params)
-    console.log('queryResult', queryResult) // Hello world!
+    // console.log('queryResult', queryResult) // Hello world!
     return queryResult
 }
 
