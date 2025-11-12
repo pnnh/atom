@@ -1,6 +1,7 @@
 import 'server-only'
 import pgPromise, {IDatabase} from 'pg-promise'
 import {IClient} from "pg-promise/typescript/pg-subset";
+import {serverGetGlobalVariable, serverSetGlobalVariable} from "@/atom/server/global";
 
 // const serverConfig = await useServerConfig()
 // const connString = serverConfig.DATABASE_URL
@@ -10,10 +11,12 @@ import {IClient} from "pg-promise/typescript/pg-subset";
 // })
 // await client.connect()
 
-const pgPoolMap: Map<string, IDatabase<{}, IClient>> = new Map<string, IDatabase<{}, IClient>>()
 const defaultDBName = "default";
+const pgPoolMapKey = 'pgPoolMap';
+serverSetGlobalVariable(pgPoolMapKey, new Map<string, IDatabase<{}, IClient>>());
 
 export async function initPgdbFor(dbName: string, dbUrl: string) {
+    const pgPoolMap: Map<string, IDatabase<{}, IClient>> = await serverGetGlobalVariable('pgPoolMap');
     if (pgPoolMap.has(dbName)) {
         return
     }
@@ -26,6 +29,7 @@ export async function initPgdb(dbUrl: string) {
 }
 
 export async function pgGetDb(dbName: string) {
+    const pgPoolMap: Map<string, IDatabase<{}, IClient>> = await serverGetGlobalVariable(pgPoolMapKey);
     return pgPoolMap.get(dbName);
 }
 

@@ -3,10 +3,11 @@ import {ConfigOptions} from "@/atom/server/config/config";
 import {isValidName} from "@/atom/common/utils/string";
 import NodeCache from "node-cache";
 import {initPgdbFor, pgQueryOneFor} from "@/atom/server/pgsql/pgsql";
+import {serverGetGlobalVariable, serverSetGlobalVariable} from "@/atom/server/global";
 
-const configCache = new NodeCache({stdTTL: 30, checkperiod: 10});
-
+const configCacheKey = 'configCache';
 const PgConfigDbname = 'configdb';
+serverSetGlobalVariable(configCacheKey, new NodeCache({stdTTL: 30, checkperiod: 10}));
 
 export class PgConfigStore implements IServerConfigStore {
     private configUrl: string;
@@ -42,10 +43,13 @@ export class PgConfigStore implements IServerConfigStore {
             throw new Error(`Invalid scope or name: ${scope}, ${name}`);
         }
         const cacheKey = `${this.configOptions.project}.${this.configOptions.app}.${this.configOptions.env}.${this.configOptions.svc}.${scope}.${name}`;
+        const configCache: NodeCache = serverGetGlobalVariable(configCacheKey);
         const cacheValue = configCache.get(cacheKey);
         if (cacheValue) {
+            console.debug(`cacheValue`);
             return cacheValue;
         }
+        console.debug(`cacheValue2`);
         let baseSqlText = ` select c.content 
 from configuration c 
     join environments e on c.environment = e.uid `

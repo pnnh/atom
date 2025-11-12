@@ -1,11 +1,20 @@
 'use client'
 
 import {decodeBase58String} from "@/atom/common/utils/basex";
+import {clientGetWindowVariable, clientSetWindowVariable} from "@/atom/client/window";
+
+const CLIENT_CONFIG_KEY = 'ClientConfig'
 
 export function useClientConfig(encodedBrowserConfig?: string): any {
+    let configValue = clientGetWindowVariable(CLIENT_CONFIG_KEY)
+    if (configValue) {
+        return configValue
+    }
     if (encodedBrowserConfig) {
         const configText = decodeBase58String(encodedBrowserConfig)
-        return JSON.parse(configText)
+        configValue = JSON.parse(configText)
+        clientSetWindowVariable(CLIENT_CONFIG_KEY, configValue)
+        return configValue
     }
     const lgEnv = document.getElementById('LGEnv') as HTMLInputElement
     if (!lgEnv) {
@@ -15,5 +24,7 @@ export function useClientConfig(encodedBrowserConfig?: string): any {
         throw Error('LGEnv 元素没有内容，无法获取配置')
     }
     const configText = decodeBase58String(lgEnv.value)
-    return JSON.parse(configText)
+    configValue = JSON.parse(configText)
+    clientSetWindowVariable(CLIENT_CONFIG_KEY, configValue)
+    return configValue
 }
