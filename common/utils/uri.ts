@@ -14,3 +14,13 @@ export function isValidUrl(address: string) {
         return false;
     }
 }
+
+// Sanitize src url before usage to prevent XSS (client-side validation)
+export function sanitizeUrl(src: string | undefined): string {
+    if (!src) return '';
+    // Only allow http/https URLs or relative paths beginning with '/'
+    if (/^(https?:\/\/)/i.test(src)) return src;
+    if (/^\/[^/]/.test(src)) return src;
+    // Fallback to empty string or default image
+    return '';
+}
