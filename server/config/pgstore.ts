@@ -51,7 +51,7 @@ export class PgConfigStore implements IServerConfigStore {
         }
         console.debug(`cacheValue2`);
         let baseSqlText = ` select c.content 
-from configuration c `
+from galaxy.configuration c `
 
         let whereText = ` where c.name = $/name/ `;
 
