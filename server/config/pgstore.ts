@@ -51,35 +51,14 @@ export class PgConfigStore implements IServerConfigStore {
         }
         console.debug(`cacheValue2`);
         let baseSqlText = ` select c.content 
-from configuration c 
-    join environments e on c.environment = e.uid `
+from configuration c `
 
-        let whereText = ` where e.name = $/environment/ and c.name = $/name/ `;
+        let whereText = ` where c.name = $/name/ `;
 
         const sqlParams: any = {
             environment: this.configOptions.env,
             name,
         };
-
-        if (scope === 'project' || scope === 'app' || scope === 'svc') {
-            baseSqlText += ` join projects p on c.project = p.uid `;
-            whereText += ` and p.name = $/project/ `;
-            sqlParams.project = this.configOptions.project;
-
-            if (scope === 'app' || scope === 'svc') {
-                baseSqlText += ` join applications a on c.application = a.uid `;
-                whereText += ` and a.name = $/application/ `;
-                sqlParams.application = this.configOptions.app;
-
-                if (scope === 'svc') {
-                    baseSqlText += ` join services s on c.service = s.uid `;
-                    whereText += ` and s.name = $/service/ `;
-                    sqlParams.service = this.configOptions.svc;
-                }
-            }
-        } else {
-            throw new Error('invalid scope');
-        }
 
         const fullSqlText = ` ${baseSqlText} ${whereText} limit 1;`;
 
