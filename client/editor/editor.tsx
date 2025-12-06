@@ -1,5 +1,3 @@
-'use client'
-
 import React, {ClipboardEvent, JSX, useCallback, useMemo, useState} from 'react'
 import {Editable, ReactEditor, RenderElementProps, RenderLeafProps, Slate, withReact} from 'slate-react'
 import {
@@ -46,19 +44,23 @@ const StorageKey = 'editor-value'
 // 这里是单例的，一个页面只能有一个Editor
 let editorObject: ReactEditor & HistoryEditor
 
-export function SFXEditor(props: { value: SFEditorModel, onChange: (value: SFEditorModel) => void }) {
+export function SFXEditor({lang, value, onChange}: {
+    lang: string,
+    value: SFEditorModel,
+    onChange: (value: SFEditorModel) => void
+}) {
     const renElement = useCallback((props: RenderElementProps) => <Element {...props}/>, [])
     const renLeaf = useCallback((props: RenderLeafProps) => <Leaf {...props}/>, [])
     const editorNode = withHistory(withReact(createEditor()))
     editorObject = useMemo(() => editorNode, [])
     const decorate = useCallback(decorateElement, [])
     return (
-        <Slate editor={editorObject} initialValue={props.value.children}
+        <Slate editor={editorObject} initialValue={value.children}
                onChange={value => {
                    const editorValue = {
                        children: parseDescendantArray(value)
                    }
-                   props.onChange(editorValue)
+                   onChange(editorValue)
                }}>
 
             <div className={'steleEditor'}>

@@ -1,7 +1,8 @@
 import {base32hex, base64url} from 'rfc4648'
 import {parse as uuidParse, v4 as uuidv4} from 'uuid';
-import {base58xrp,} from '@scure/base';
+import {base58, base58flickr, base58xmr, base58xrp, createBase58check,} from '@scure/base';
 import md5 from "md5";
+import {sha256} from "@noble/hashes/sha2.js";
 
 /**
  * 将字符串转换为base64编码的字符串
@@ -132,37 +133,57 @@ export function mustBase58ToUuid(base58String: string): string {
     throw new Error(`mustBase58ToUuid Invalid base58 string: ${base58String}`);
 }
 
-/**
- * 将字符串转换为base58编码的字符串
- * @param data - 待编码的字符串
- * @returns base58编码的字符串
- */
-export function stringToBase58(data: string): string {
+export function stringToBase58(data: string, flavor: string = 'xrp'): string {
     try {
         const enc = new TextEncoder()
-        return base58xrp.encode(enc.encode(data))
+        const dataBytes = enc.encode(data)
+        switch (flavor) {
+            case 'xrp':
+                return base58xrp.encode(dataBytes)
+            case 'xmr':
+                return base58xmr.encode(dataBytes)
+            case 'flickr':
+                return base58flickr.encode(dataBytes)
+            case 'check':
+                const coder = createBase58check(sha256)
+                return coder.encode(dataBytes)
+        }
+        return base58.encode(dataBytes)
     } catch (e) {
         throw new Error(`stringToBase58 encode error: ${data} : ${e}`);
     }
 }
 
 export function encodeBase58String(state: string): string {
-    return stringToBase58(state)
+    return stringToBase58(state, 'xrp')
 }
 
 export function decodeBase58String(base58State: string): string {
     return base58ToString(base58State)
 }
 
-/**
- * 将base58编码的字符串转换为字符串
- * @param data - 待解码的base58编码的字符串
- * @returns 解码后的字符串
- */
-export function base58ToString(data: string): string {
+export function base58ToString(data: string, flavor: string = 'xrp'): string {
     try {
+        let decoded: Uint8Array
+        switch (flavor) {
+            case 'xrp':
+                decoded = base58xrp.decode(data)
+                break
+            case 'xmr':
+                decoded = base58xmr.decode(data)
+                break
+            case 'flickr':
+                decoded = base58flickr.decode(data)
+                break
+            case 'check':
+                const coder = createBase58check(sha256)
+                decoded = coder.decode(data)
+                break
+            default:
+                decoded = base58.decode(data)
+        }
         const dec = new TextDecoder()
-        return dec.decode(base58xrp.decode(data))
+        return dec.decode(decoded)
     } catch (e) {
         throw new Error(`base58ToString decode error: ${data} : ${e}`);
     }
