@@ -33,6 +33,16 @@ export function encodeBase32String(state: string | unknown): string {
     }
 }
 
+export function decodeBase32String(base32State: string): string {
+    try {
+        const stateData = base32hex.parse(base32State)
+        const decoder = new TextDecoder()
+        return decoder.decode(stateData)
+    } catch (e) {
+        throw new Error(`decodeBase32String decode error: ${base32State} : ${e}`);
+    }
+}
+
 /**
  * 将base64编码的字符串转换为字符串
  * @param base64State - 待解码的base64编码的字符串

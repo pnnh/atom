@@ -1,6 +1,6 @@
 import fs from "fs";
 import os from "os";
-import path from "path";
+import path from "node:path";
 
 export function resolvePath(relatePath: string): string {
     const filePrefix = 'file://'

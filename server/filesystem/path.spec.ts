@@ -1,6 +1,5 @@
 import {expect, test} from 'vitest'
-import {resolvePath} from "@/atom/server/filesystem/path";
-
+import {resolvePath} from "./path";
 
 test('resolve path', () => {
     const resolvedPath = resolvePath('~/test.txt');
