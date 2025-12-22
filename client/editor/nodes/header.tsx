@@ -1,5 +1,3 @@
-'use client'
-
 import React, {JSX} from 'react'
 import {SFElement} from './node'
 import {ReactEditor, useSlate} from 'slate-react'

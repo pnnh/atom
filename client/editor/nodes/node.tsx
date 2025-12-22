@@ -1,5 +1,3 @@
-'use client'
-
 import React, {JSX} from 'react'
 import {Descendant as SlateDescendant, Element as SlateElement, Text as SlateText} from 'slate'
 

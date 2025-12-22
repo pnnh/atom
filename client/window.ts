@@ -1,5 +1,3 @@
-'use client'
-
 export function clientSetWindowVariable(key: string, value: any) {
     // In some server-side rendering scenarios, window may be undefined
     if (!window) {
