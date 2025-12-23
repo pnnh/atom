@@ -1,3 +1,5 @@
+'use client'
+
 import React, {KeyboardEvent} from 'react'
 import {SFText} from './node'
 import {ReactEditor, useSlate} from 'slate-react'

@@ -1,3 +1,5 @@
+'use client'
+
 import React, {useState} from 'react'
 import {SFElement} from './node'
 import {ReactEditor, useSlate} from 'slate-react'

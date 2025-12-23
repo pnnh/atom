@@ -1,3 +1,5 @@
+'use client'
+
 const mailboxList: Map<string, IMailbox> = new Map();
 
 export function registerMailbox(component: IMailbox) {
