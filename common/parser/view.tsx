@@ -6,10 +6,10 @@ import {
     ListNode,
     ParagraphNode,
     SteleNode
-} from '@/atom/common/models/stele'
+} from 'common/models/stele'
 import Prism, {Grammar} from "prismjs";
-import {encodeBase64String} from "@/atom/common/utils/basex";
-import {TocItem} from "@/atom/common/models/toc";
+import {encodeBase64String} from "common/utils/basex";
+import {TocItem} from "common/models/toc";
 import {JSX} from "react";
 
 export function buildNodeView(tocList: Array<TocItem>, node: SteleNode, assetsUrl: string): JSX.Element {
@@ -47,7 +47,7 @@ export function buildNodeView(tocList: Array<TocItem>, node: SteleNode, assetsUr
 function buildBodyView(tocList: Array<TocItem>, node: SteleNode, assetsUrl: string) {
     return <div>
         {node.children && node.children.length > 0
-            ? node.children.map((child, index) => {
+            ? node.children.map((child: any, index: any) => {
                 return <div key={`node-${index}`}>{buildNodeView(tocList, child, assetsUrl)}</div>
             })
             : <></>
@@ -61,7 +61,7 @@ function buildParagraph(tocList: Array<TocItem>, node: ParagraphNode, assetsUrl:
     if (!children || children.length < 1) return <p></p>
 
     return <p key={node.id} className={'paragraph'}>
-        {children.map((child, index) => {
+        {children.map((child: any, index: any) => {
             return <span key={`paragraph-${index}`}>{buildNodeView(tocList, child, assetsUrl)}</span>
         })}
     </p>
@@ -97,7 +97,7 @@ function buildTextView(tocList: Array<TocItem>, node: SteleNode, assetsUrl: stri
     if (!node.children) {
         return <span key={node.id}>{node.text}</span>
     }
-    return <span key={node.id}>{node.children.map((child, index) => {
+    return <span key={node.id}>{node.children.map((child: any, index: any) => {
         return buildNodeView([], child, assetsUrl)
     })}</span>
 }
@@ -134,7 +134,7 @@ export function buildCodeBlock(tocList: Array<TocItem>, node: CodeBlockNode) {
         language = 'text'
     }
     if (!codeText && node.children) {
-        codeText = node.children.map((child) => {
+        codeText = node.children.map((child: any) => {
             return child.text
         }).join()
     }
@@ -154,7 +154,7 @@ export function buildImage(node: ImageNode, assetsUrl: string) {
 
 export function buildList(node: ListNode, assetsUrl: string) {
     return <ul key={node.id}>
-        {node.children && node.children.map((child, index) => {
+        {node.children && node.children.map((child: any, index: any) => {
             return <li key={`list-${index}`}>{buildNodeView([], child, assetsUrl)}</li>
         })}
     </ul>

@@ -1,4 +1,4 @@
-'use client'
+
 
 import {ReactEditor} from 'slate-react'
 import {Editor as SlateEditor, Node as SlateNode, Transforms} from 'slate'

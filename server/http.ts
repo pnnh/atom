@@ -1,5 +1,3 @@
-'use server'
-
 export async function serverMakeGet<T>(url: string, authHeader: string): Promise<T> {
     const response = await fetch(url, {
         credentials: 'include',

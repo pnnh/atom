@@ -1,7 +1,7 @@
-import 'server-only'
+
 import pgPromise, {IDatabase} from 'pg-promise'
 import {IClient} from "pg-promise/typescript/pg-subset";
-import {serverGetGlobalVariable, serverSetGlobalVariable} from "@/atom/server/global";
+import {serverGetGlobalVariable, serverSetGlobalVariable} from "server/global";
 
 // const serverConfig = await useServerConfig()
 // const connString = serverConfig.DATABASE_URL

@@ -1,4 +1,4 @@
-'use client'
+
 
 import React, {KeyboardEvent} from 'react'
 import {SFText} from './node'

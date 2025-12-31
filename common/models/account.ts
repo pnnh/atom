@@ -1,5 +1,5 @@
-import {uuidToBase58} from "@/atom/common/utils/basex";
-import {EmptyUUID} from "@/atom/common/utils/uuid";
+import {uuidToBase58} from "common/utils/basex";
+import {EmptyUUID} from "common/utils/uuid";
 
 export interface AccountModel {
     uid: string

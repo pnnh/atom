@@ -1,7 +1,7 @@
-'use client'
 
-import {decodeBase58String} from "@/atom/common/utils/basex";
-import {clientGetWindowVariable, clientSetWindowVariable} from "@/atom/client/window";
+
+import {decodeBase58String} from "common/utils/basex";
+import {clientGetWindowVariable, clientSetWindowVariable} from "client/window";
 
 const CLIENT_CONFIG_KEY = 'ClientConfig'
 

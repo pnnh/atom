@@ -1,8 +1,8 @@
 import React from "react";
-import {TocItem} from "@/atom/common/models/toc";
-import {SteleBody} from "@/atom/common/models/stele";
-import {markdownToStele} from "@/atom/common/parser/markdown";
-import {buildNodeView} from "@/atom/common/parser/view";
+import {TocItem} from "../common/models/toc";
+import {SteleBody} from "../common/models/stele";
+import {markdownToStele} from "../common/parser/markdown";
+import {buildNodeView} from "../common/parser/view";
 
 export function ServerBuildBodyHtml(props: {
     tocList: Array<TocItem>,

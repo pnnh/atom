@@ -1,4 +1,4 @@
-'use client'
+
 
 const mailboxList: Map<string, IMailbox> = new Map();
 
