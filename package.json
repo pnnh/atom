@@ -2,7 +2,8 @@
   "name": "@pnnh/atom",
   "version": "0.1.5",
   "scripts": {
-    "build": "rollup -c rollup.config.mjs"
+    "build": "rollup -c rollup.config.mjs",
+    "test": "vitest run"
   },
   "main": "./dist/server.cjs.js",
   "module": "./dist/server.es.js",
