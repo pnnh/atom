@@ -50,7 +50,7 @@
     "@emotion/server": "^11.11.0",
     "@emotion/styled": "^11.14.0",
     "@fingerprintjs/fingerprintjs": "^5.0.1",
-    "@fontsource/roboto": "^5.1.1",
+    "@fontsource/roboto": "^5.2.9",
     "@mui/icons-material": "^7.3.5",
     "@mui/material": "^7.3.5",
     "@noble/hashes": "^2.0.0",
