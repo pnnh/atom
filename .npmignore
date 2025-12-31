@@ -1,0 +1,12 @@
+client/
+common/
+server/
+example/
+node_modules/
+rollup.config.mjs
+tsconfig.json
+vite.config.mts
+.env
+*.tsbuildinfo
+vitest.config.mts
+vitest.setup.mts

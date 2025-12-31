@@ -5,6 +5,12 @@
     "build": "rollup -c rollup.config.mjs",
     "test": "vitest run"
   },
+  "files": [
+    "dist/",          
+    "README.md",      
+    "LICENSE",      
+    "package.json"   
+  ],
   "main": "./dist/server.cjs.js",
   "module": "./dist/server.es.js",
   "types": "./dist/server.d.ts",
