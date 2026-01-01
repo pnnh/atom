@@ -33,7 +33,15 @@ import {
 } from './nodes/codeblock'
 import Prism from 'prismjs'
 import './highlight'
-import './editor.scss'
+import './editor.css'
+export * from './nodes/node'
+export * from './nodes/codeblock'
+export * from './nodes/header'
+export * from './nodes/node'
+export * from './nodes/paragraph'
+export * from './nodes/quote-block'
+export * from './nodes/text'
+
 
 import {parseDescendant, parseDescendantArray, parseElement, parseText, SFEditorModel, SFText} from './nodes/node'
 import {selectNodeLast} from './helpers'

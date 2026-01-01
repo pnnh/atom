@@ -5,7 +5,10 @@ export * from './window'
 export * from './button/throttle'
 export * from './cookie/cookie'
 export * from './postoffice/mailbox'
-export * from '../common/common'
+export * from './editor/editor'
+export * from './editor/helpers'
+export * from './editor/highlight' 
+
 
 export async function atomClientHello() {
     return "atomClientHello";

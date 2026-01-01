@@ -17,6 +17,7 @@ export * from './utils/string'
 export * from './utils/uri'
 export * from './models/protocol'
 export * from './models/toc'
+export * from './models/stele'
 export * from './parser/view'
 export * from './parser/markdown'
 

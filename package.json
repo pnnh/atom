@@ -6,29 +6,29 @@
     "test": "vitest run"
   },
   "files": [
-    "dist/",          
-    "README.md",      
-    "LICENSE",      
-    "package.json"   
+    "dist/",
+    "README.md",
+    "LICENSE",
+    "package.json"
   ],
-  "main": "./dist/server.cjs.js",
-  "module": "./dist/server.es.js",
+  "main": "./dist/server.cjs",
+  "module": "./dist/server.mjs",
   "types": "./dist/server.d.ts",
   "exports": {
     ".": {
       "types": "./dist/server.d.ts",
-      "import": "./dist/server.es.js",
-      "require": "./dist/server.cjs.js"
+      "import": "./dist/server.mjs",
+      "require": "./dist/server.cjs"
     },
     "./browser": {
       "types": "./dist/client.d.ts",
-      "import": "./dist/client.es.js",
-      "require": "./dist/client.cjs.js"
+      "import": "./dist/client.mjs",
+      "require": "./dist/client.cjs"
     },
     "./nodejs": {
       "types": "./dist/server.d.ts",
-      "import": "./dist/server.es.js",
-      "require": "./dist/server.cjs.js"
+      "import": "./dist/server.mjs",
+      "require": "./dist/server.cjs"
     },
     "./package.json": "./package.json"
   },
@@ -152,6 +152,7 @@
     "http-proxy-middleware": "^3.0.3",
     "jsdom": "^27.1.0",
     "rollup-plugin-dts": "^6.3.0",
+    "rollup-plugin-import-css": "^4.1.2",
     "sass": "^1.93.3",
     "ts-node": "^10.9.2",
     "tslib": "^2.6.3",
