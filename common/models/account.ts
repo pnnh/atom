@@ -1,5 +1,5 @@
-import {uuidToBase58} from "common/utils/basex";
-import {EmptyUUID} from "common/utils/uuid";
+import {uuidToBase58} from "../utils/basex";
+import {EmptyUUID} from "../utils/uuid";
 
 export interface AccountModel {
     uid: string

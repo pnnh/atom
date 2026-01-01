@@ -6,10 +6,10 @@ import {
     ListNode,
     ParagraphNode,
     SteleNode
-} from 'common/models/stele'
+} from '../models/stele'
 import Prism, {Grammar} from "prismjs";
-import {encodeBase64String} from "common/utils/basex";
-import {TocItem} from "common/models/toc";
+import {encodeBase64String} from "../utils/basex";
+import {TocItem} from "../models/toc";
 import {JSX} from "react";
 
 export function buildNodeView(tocList: Array<TocItem>, node: SteleNode, assetsUrl: string): JSX.Element {

@@ -1,6 +1,6 @@
 
 
-import {decodeBase58String} from "common/utils/basex";
+import {decodeBase58String} from "../../common/utils/basex";
 import {clientGetWindowVariable, clientSetWindowVariable} from "client/window";
 
 const CLIENT_CONFIG_KEY = 'ClientConfig'
