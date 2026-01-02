@@ -5,6 +5,11 @@
     "build": "rollup -c rollup.config.mjs",
     "test": "vitest run"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pnnh/atom.git"
+  },
+  "license": "AGPL-3.0-only",
   "files": [
     "dist/",
     "README.md",
