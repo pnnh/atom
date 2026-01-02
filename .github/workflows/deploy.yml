@@ -24,7 +24,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-          cache: 'npm' # 开启 npm 缓存
+          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
         run: npm ci --legacy-peer-deps
@@ -47,7 +48,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-          cache: 'npm' # 开启 npm 缓存
+          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Update npm to latest
+        run: npm install -g npm@latest
 
       - name: Install dependencies
         run: npm ci --legacy-peer-deps
@@ -78,7 +83,7 @@ jobs:
         run: |
           npm version ${{ steps.release.outputs.version }} --no-git-tag-version --allow-same-version=false
 
-      - name: Publish to GitHub Packages
+      - name: Publish to npm packages
         if: steps.release.outputs.tag_name != '' # Only publish if a new tag was created
         run: npm publish --access public
 
