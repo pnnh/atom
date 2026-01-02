@@ -1,6 +1,6 @@
 {
   "name": "@pnnh/atom",
-  "version": "0.1.5",
+  "version": "0.6.0",
   "scripts": {
     "build": "rollup -c rollup.config.mjs",
     "test": "vitest run"
@@ -11,14 +11,14 @@
     "LICENSE",
     "package.json"
   ],
-  "main": "./dist/server.cjs",
-  "module": "./dist/server.mjs",
-  "types": "./dist/server.d.ts",
+  "main": "./dist/common.cjs",
+  "module": "./dist/common.mjs",
+  "types": "./dist/common.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/server.d.ts",
-      "import": "./dist/server.mjs",
-      "require": "./dist/server.cjs"
+      "types": "./dist/common.d.ts",
+      "import": "./dist/common.mjs",
+      "require": "./dist/common.cjs"
     },
     "./browser": {
       "types": "./dist/client.d.ts",
@@ -34,6 +34,9 @@
   },
   "typesVersions": {
     "*": {
+      ".": [
+        "./dist/common.d.ts"
+      ],
       "browser": [
         "./dist/client.d.ts"
       ],
