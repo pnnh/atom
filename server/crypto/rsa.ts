@@ -1,4 +1,4 @@
-import {constants, privateDecrypt, publicEncrypt} from 'crypto';
+import {constants, createSign, createVerify, privateDecrypt, publicEncrypt} from 'crypto';
 
 export async function nodeGenerateRsaKeyPair(): Promise<{ publicKey: string; privateKey: string }> {
     const {generateKeyPair} = await import('crypto');
@@ -58,5 +58,27 @@ export async function nodeDecodeRsa(encryptedData: string, key: string): Promise
         return decrypted.toString('utf8');
     } catch (err) {
         throw new Error(`RSA decryption failed: ${(err as Error).message}`);
+    }
+}
+
+export async function nodeSignRsa(data: string, privateKey: string, algorithm: string = 'SHA256'): Promise<string> {
+    try {
+        const sign = createSign(`RSA-${algorithm}`);
+        sign.update(data, 'utf8');
+        sign.end();
+        return sign.sign(privateKey, 'base64');
+    } catch (err) {
+        throw new Error(`RSA signing failed: ${(err as Error).message}`);
+    }
+}
+
+export async function nodeVerifyRsa(data: string, signature: string, publicKey: string, algorithm: string = 'SHA256'): Promise<boolean> {
+    try {
+        const verify = createVerify(`RSA-${algorithm}`);
+        verify.update(data, 'utf8');
+        verify.end();
+        return verify.verify(publicKey, signature, 'base64');
+    } catch (err) {
+        throw new Error(`RSA verification failed: ${(err as Error).message}`);
     }
 }

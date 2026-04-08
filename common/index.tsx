@@ -1,5 +1,3 @@
-
-export * from './language'
 export * from './utils/uuid'
 export * from './utils/basex'
 export * from './utils/convert'
